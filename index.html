@@ -1,2 +1,39 @@
-<h1>quote generator</h1>
-edit received from github desktop
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>quote generator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="quote-box">
+        <h2>Quote of the day</h2>
+        <blockquote id="quote">Loading quote...</blockquote>
+        <span id="author">Loading author name...</span>
+
+        <div>
+            <button onclick="getquote(api_url)">New Quote</button>
+            <button>Share</button>
+        </div>
+    </div>
+
+    <script>
+        const quote = document.getElementById("quote");
+        const author = document.getElementById("author");
+        const api_url = "https://api.quotable.io/random";
+
+        async function getquote(url){
+            const reponse = await fetch(url);
+            var data = await reponse.json();
+            
+            quote.innerHTML = data.content;
+            author.innerHTML = data.author;
+        }
+
+        getquote(api_url);
+    </script>
+    
+</body>
+</html>
